@@ -13,7 +13,7 @@ public class Main {
     private int p;
 
 
-    int[][][] M;
+    /*int[][][] M;
 
     int[][] multiply(int m) {
         int[][] result = new int[n][n];
@@ -38,7 +38,7 @@ public class Main {
             }
         }
         return result;
-    }
+    }*/
 
     void solve(Scanner in, PrintWriter out) {
         this.m = in.nextInt();
@@ -47,7 +47,7 @@ public class Main {
         this.b = in.nextInt();
         this.p = in.nextInt();
 
-        M = new int[m + 1][n][n];
+        /*M = new int[m + 1][n][n];
 
         for (int i = 1; i <= m; i++) {
             for (int j = 0; j < n; j++) {
@@ -57,48 +57,49 @@ public class Main {
             }
         }
 
-        out.println(multiply(m)[a-1][b-1]);
+        out.println(multiply(m)[a-1][b-1]);*/
 
-        /*int[][] mA = new int[n][n];
-        int[][] mB = new int[n][n];
-        int[][] mC = new int[n][n];
+        try {
+            int[][] mA = new int[n][n];
+            int[][] mBT = new int[n][n];
+            int[][] mC = new int[n][n];
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                mA[i][j] = in.nextInt();
-            }
-        }
-
-        for (int q = 1; q < m; q++) {
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
-                    mB[i][j] = in.nextInt();
+                    mA[i][j] = in.nextInt();
                 }
             }
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < n; j++) {
-                    mC[i][j] = 0;
-                    for (int k = 0; k < n; k++) {
-                        int x = mA[i][k] * mB[k][j];
-                        if (x >= p) {
-                            mC[i][j] += x % p;
-                        } else {
-                            mC[i][j] += x;
-                        }
+
+            for (int q = 1; q < m; q++) {
+                for (int i = 0; i < n; i++) {
+                    for (int j = 0; j < n; j++) {
+                        mBT[j][i] = in.nextInt();
                     }
-                    if (mC[i][j] >= p)
-                        mC[i][j] = mC[i][j] % p;
+                }
+                for (int i = 0; i < n; i++) {
+                    for (int j = 0; j < n; j++) {
+                        mC[i][j] = 0;
+                        for (int k = 0; k < n; k++) {
+                            int x = mA[i][k] * mBT[j][k];
+                            if (x >= p) {
+                                mC[i][j] += x % p;
+                            } else {
+                                mC[i][j] += x;
+                            }
+                        }
+                        if (mC[i][j] >= p)
+                            mC[i][j] = mC[i][j] % p;
 
+                    }
+                }
+
+                for (int i = 0; i < n; i++) {
+                    mA[i] = Arrays.copyOf(mC[i], mC[i].length);
                 }
             }
 
-            for (int i = 0; i < n; i++) {
-                mA[i] = Arrays.copyOf(mC[i], mC[i].length);
-            }
-        }
-
-        System.out.println(mA[a - 1][b - 1]);
-*/
+            System.out.println(mA[a - 1][b - 1]);
+        } catch (Exception e) {}
     }
 
     void run() {
